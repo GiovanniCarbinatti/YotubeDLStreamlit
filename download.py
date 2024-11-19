@@ -29,10 +29,13 @@ if url:
             if st.button("Download"):
                 with st.spinner("Downloading..."):
                     download_path = os.path.join(os.getcwd(), "downloads")
-                    os.makedirs(download_path, exist_ok=True)  # Create 'downloads' folder if it doesn't exist
+                    os.makedirs(download_path, exist_ok=True)
                     ydl_opts = {
                         'format': format_id,
-                        'outtmpl': os.path.join(download_path, '%(title)s.%(ext)s'),  # Save with title as filename
+                        'outtmpl': os.path.join(download_path, '%(title)s.%(ext)s'),
+                        'http_headers': {
+                                        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+                                        },
                     }
 
                     with YoutubeDL(ydl_opts) as ydl_download:
